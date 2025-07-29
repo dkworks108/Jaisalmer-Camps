@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons (call, WhatsApp) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- The main CSS is kept in the head to ensure the page is styled as it renders -->
   <style>
     body {
@@ -25,8 +27,6 @@
       box-shadow: 0 10px 35px rgba(0,0,0,0.1);
     }
     .header {
-      /* PERFORMANCE: Replaced heavy external image with a fast-loading placeholder. */
-      /* For production, use a highly compressed and optimized image hosted on a CDN. */
       background: url('https://placehold.co/700x280/a8651c/ffffff?text=Desert+Camp+Resort') center/cover no-repeat;
       height: 280px;
       display: flex;
@@ -90,21 +90,19 @@
     /* --- Package Styles --- */
     .packages-container {
         margin-top: 40px;
-        /* Removed padding-bottom as sticky behavior is changed */
         position: relative;
     }
     .package-card {
         padding: 25px 30px;
         border-radius: 15px;
         box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-        margin-bottom: 20px; /* Added margin for spacing between cards */
-        /* Removed position: sticky and top properties to fix overlapping */
+        margin-bottom: 20px;
         color: #fff;
-        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .package-card:hover {
-        transform: translateY(-5px); /* Subtle lift effect on hover */
-        box-shadow: 0 12px 40px rgba(0,0,0,0.2); /* Enhanced shadow on hover */
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.2);
     }
     .package-card h3 {
         font-family: 'Playfair Display', serif;
@@ -118,11 +116,11 @@
         display: flex;
         justify-content: space-between;
         gap: 25px;
-        flex-wrap: wrap; /* Allows details to wrap on smaller screens */
+        flex-wrap: wrap;
     }
     .tent-type {
         flex: 1;
-        min-width: 200px; /* Ensures minimum width before wrapping */
+        min-width: 200px;
         background: rgba(0,0,0,0.1);
         padding: 15px;
         border-radius: 10px;
@@ -157,6 +155,37 @@
         color: #fff;
         font-size: 15px;
     }
+
+    /* Book Now Button Styles */
+    .book-now-options {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    .book-now-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        text-decoration: none;
+        padding: 12px 20px;
+        border-radius: 25px;
+        font-size: 17px;
+        font-weight: 500;
+        transition: background 0.3s ease, transform 0.2s ease;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .book-now-btn i {
+        margin-right: 10px;
+        font-size: 20px;
+    }
+    .book-now-btn:hover {
+        background: rgba(255, 255, 255, 0.35);
+        transform: translateY(-2px);
+    }
+
     /* Unique gradients for each card */
     .card-1 { background: linear-gradient(45deg, #a8651c, #c78948); }
     .card-2 { background: linear-gradient(45deg, #b57c3f, #d19a67); }
@@ -195,7 +224,7 @@
     }
     .interests-group {
         display: flex;
-        flex-wrap: wrap; /* Allows checkboxes to wrap */
+        flex-wrap: wrap;
         gap: 10px;
     }
     .interests-group label {
@@ -208,7 +237,7 @@
         transition: all 0.2s ease;
     }
     .interests-group input[type="checkbox"] {
-        display: none; /* Hide default checkbox */
+        display: none;
     }
     .interests-group input[type="checkbox"]:checked + label {
         background-color: #a8651c;
@@ -267,7 +296,82 @@
     #itinerary-result h4 { color: #c78948; margin-top: 15px; }
     #itinerary-result ul { padding-left: 20px; }
     #itinerary-result li { margin-bottom: 8px; }
-    #itinerary-result p { text-align: left; } /* Ensure generated text aligns left */
+    #itinerary-result p { text-align: left; }
+
+    /* --- Photo Gallery Styles --- */
+    .gallery-section {
+        background-color: #f9ede1;
+        margin: 40px 30px;
+        border-radius: 15px;
+        padding: 40px;
+        text-align: center;
+    }
+    .gallery-section h2 {
+        color: #a8651c;
+        font-family: 'Playfair Display', serif;
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+    .slider-container {
+        position: relative;
+        max-width: 600px; /* Max width for the slider */
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    .slider-wrapper {
+        display: flex;
+        transition: transform 0.5s ease-in-out; /* Smooth transition for slides */
+    }
+    .slider-wrapper img {
+        width: 100%;
+        height: 400px; /* Fixed height for consistency */
+        object-fit: cover; /* Ensures images cover the area without distortion */
+        display: block;
+        flex-shrink: 0; /* Prevent images from shrinking */
+    }
+    .slider-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.5);
+        color: #fff;
+        border: none;
+        padding: 15px 10px;
+        cursor: pointer;
+        font-size: 24px;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+        z-index: 10;
+    }
+    .slider-nav-btn:hover {
+        background: rgba(0,0,0,0.7);
+    }
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+    .slider-dots {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 10;
+    }
+    .dot {
+        width: 12px;
+        height: 12px;
+        background: rgba(255,255,255,0.6);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .dot.active {
+        background: #a8651c;
+        transform: scale(1.2);
+        box-shadow: 0 0 0 2px rgba(255,255,255,0.8);
+    }
 
     /* --- CTA & Footer --- */
     .cta {
@@ -297,6 +401,29 @@
       font-size: 13px;
       padding: 20px 30px;
     }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+        .header h1 {
+            font-size: 32px;
+        }
+        .section {
+            padding: 30px 20px;
+        }
+        .package-card {
+            padding: 20px;
+        }
+        .tent-type {
+            min-width: 100%;
+        }
+        .slider-wrapper img {
+            height: 250px; /* Adjust height for smaller screens */
+        }
+        .slider-nav-btn {
+            padding: 10px 5px;
+            font-size: 20px;
+        }
+    }
   </style>
 </head>
 <body>
@@ -325,7 +452,7 @@
         <p>Explore our rates for the upcoming season. All packages are for double occupancy and include our full range of signature amenities. The first package is shown below; scroll down to reveal more seasonal offers.</p>
 
         <div class="packages-container">
-            <!-- Package Cards -->
+            <!-- Package Card: 1st August – 15th October (with pricing) -->
             <div class="package-card card-1">
                 <h3>1st August – 15th October</h3>
                 <div class="package-details">
@@ -333,51 +460,76 @@
                     <div class="tent-type"><h4>Royal Maharaja Suite</h4><p class="price">₹3,500</p><p class="price-note">Extra Person: ₹1,500</p></div>
                 </div><p class="child-note">Child up to 7 years complimentary.</p>
             </div>
+
+            <!-- Other Package Cards (with booking options instead of pricing) -->
             <div class="package-card card-2">
                 <h3>16th October – 30th October</h3>
-                <div class="package-details">
-                    <div class="tent-type"><h4>Deluxe Swiss Tent</h4><p class="price">₹6,000</p><p class="price-note">Extra Person: ₹1,500</p></div>
-                    <div class="tent-type"><h4>Royal Maharaja Suite</h4><p class="price">₹7,000</p><p class="price-note">Extra Person: ₹1,500</p></div>
+                <div class="book-now-options">
+                    <a href="tel:+917877075449" class="book-now-btn"><i class="fas fa-phone"></i> Call to Book</a>
+                    <a href="https://wa.me/917877075449" target="_blank" class="book-now-btn"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
                 </div>
             </div>
             <div class="package-card card-3">
                 <h3>1st November – 20th December</h3>
-                <div class="package-details">
-                    <div class="tent-type"><h4>Deluxe Swiss Tent</h4><p class="price">₹3,000</p><p class="price-note">Extra Person: ₹1,500</p></div>
-                    <div class="tent-type"><h4>Royal Maharaja Suite</h4><p class="price">₹4,000</p><p class="price-note">Extra Person: ₹1,500</p></div>
+                <div class="book-now-options">
+                    <a href="tel:+917877075449" class="book-now-btn"><i class="fas fa-phone"></i> Call to Book</a>
+                    <a href="https://wa.me/917877075449" target="_blank" class="book-now-btn"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
                 </div>
             </div>
             <div class="package-card card-4">
                 <h3>21st December – 30th December</h3>
-                <div class="package-details">
-                    <div class="tent-type"><h4>Deluxe Swiss Tent</h4><p class="price">₹7,000</p><p class="price-note">Extra Person: ₹1,500</p></div>
-                    <div class="tent-type"><h4>Royal Maharaja Suite</h4><p class="price">₹8,000</p><p class="price-note">Extra Person: ₹1,500</p></div>
+                <div class="book-now-options">
+                    <a href="tel:+917877075449" class="book-now-btn"><i class="fas fa-phone"></i> Call to Book</a>
+                    <a href="https://wa.me/917877075449" target="_blank" class="book-now-btn"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
                 </div>
             </div>
             <div class="package-card card-5">
                 <h3>31st December (New Year's Eve)</h3>
-                <div class="package-details">
-                    <div class="tent-type"><h4>Deluxe Swiss Tent</h4><p class="price">₹12,000</p><p class="price-note">Extra Person: ₹2,500</p></div>
-                    <div class="tent-type"><h4>Royal Maharaja Suite</h4><p class="price">₹15,000</p><p class="price-note">Extra Person: ₹2,500</p></div>
+                <div class="book-now-options">
+                    <a href="tel:+917877075449" class="book-now-btn"><i class="fas fa-phone"></i> Call to Book</a>
+                    <a href="https://wa.me/917877075449" target="_blank" class="book-now-btn"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
                 </div>
             </div>
             <div class="package-card card-6">
                 <h3>1st January – 15th January</h3>
-                <div class="package-details">
-                    <div class="tent-type"><h4>Deluxe Swiss Tent</h4><p class="price">₹4,500</p><p class="price-note">Extra Person: ₹1,500</p></div>
-                    <div class="tent-type"><h4>Royal Maharaja Suite</h4><p class="price">₹5,500</p><p class="price-note">Extra Person: ₹1,500</p></div>
+                <div class="book-now-options">
+                    <a href="tel:+917877075449" class="book-now-btn"><i class="fas fa-phone"></i> Call to Book</a>
+                    <a href="https://wa.me/917877075449" target="_blank" class="book-now-btn"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
                 </div>
             </div>
             <div class="package-card card-7">
                 <h3>16th January – 31st March</h3>
-                <div class="package-details">
-                    <div class="tent-type"><h4>Deluxe Swiss Tent</h4><p class="price">₹2,500</p><p class="price-note">Extra Person: ₹1,500</p></div>
-                    <div class="tent-type"><h4>Royal Maharaja Suite</h4><p class="price">₹3,500</p><p class="price-note">Extra Person: ₹1,500</p></div>
+                <div class="book-now-options">
+                    <a href="tel:+917877075449" class="book-now-btn"><i class="fas fa-phone"></i> Call to Book</a>
+                    <a href="https://wa.me/917877075449" target="_blank" class="book-now-btn"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
                 </div>
             </div>
         </div>
     </div>
     
+    <!-- Photo Gallery Section -->
+    <div class="gallery-section">
+        <h2>📸 Our Gallery</h2>
+        <div class="slider-container">
+            <div class="slider-wrapper" id="image-slider">
+                <!-- Replace these placeholder URLs with your actual image URLs -->
+                <img src="https://placehold.co/1280x960/a8651c/ffffff?text=Luxury+Tent+Interior+1" alt="Luxury Tent Interior 1 - WhatsApp Image 2025-07-29 at 2.04.09 PM (4).jpeg">
+                <img src="https://placehold.co/1280x960/b57c3f/ffffff?text=Luxury+Tent+Interior+2" alt="Luxury Tent Interior 2 - WhatsApp Image 2025-07-29 at 2.04.09 PM (3).jpeg">
+                <img src="https://placehold.co/1280x960/c19262/ffffff?text=Luxury+Tent+Interior+3" alt="Luxury Tent Interior 3 - WhatsApp Image 2025-07-29 at 2.04.09 PM (2).jpeg">
+                <img src="https://placehold.co/1280x960/d5a253/ffffff?text=Luxury+Tent+Interior+4" alt="Luxury Tent Interior 4 - WhatsApp Image 2025-07-29 at 2.04.09 PM (1).jpeg">
+                <img src="https://placehold.co/1280x960/a8651c/ffffff?text=Luxury+Tent+Interior+5" alt="Luxury Tent Interior 5 - WhatsApp Image 2025-07-29 at 2.04.08 PM (1).jpeg">
+                <img src="https://placehold.co/1280x960/b57c3f/ffffff?text=Luxury+Tent+Interior+6" alt="Luxury Tent Interior 6 - WhatsApp Image 2025-07-29 at 2.04.08 PM.jpeg">
+                <img src="https://placehold.co/1280x960/c19262/ffffff?text=Luxury+Tent+Interior+7" alt="Luxury Tent Interior 7 - WhatsApp Image 2025-07-29 at 2.04.06 PM (1).jpeg">
+                <img src="https://placehold.co/1280x960/d5a253/ffffff?text=Tent+Exterior" alt="Tent Exterior - WhatsApp Image 2025-07-29 at 2.04.06 PM.jpeg">
+            </div>
+            <button class="slider-nav-btn prev-btn" aria-label="Previous image">&#10094;</button>
+            <button class="slider-nav-btn next-btn" aria-label="Next image">&#10095;</button>
+            <div class="slider-dots" id="slider-dots">
+                <!-- Dots will be generated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <!-- Gemini Itinerary Planner Section -->
     <div class="section" id="planner-section">
         <h2>✨ Plan Your Perfect Desert Escape</h2>
@@ -430,30 +582,23 @@
     const daysInput = document.getElementById('days');
     const interestsCheckboxes = document.querySelectorAll('.interests-group input[type="checkbox"]');
 
-    // Add event listener to the generate button
     generateBtn.addEventListener('click', async () => {
-        // 1. Get user inputs
         const numberOfDays = daysInput.value;
         const selectedInterests = Array.from(interestsCheckboxes)
             .filter(i => i.checked)
             .map(i => i.value)
             .join(', ');
 
-        // Basic validation: ensure at least one interest is selected
         if (!selectedInterests) {
             resultContainer.innerHTML = `<p style="color: red; text-align: center;">Please select at least one interest to generate your itinerary.</p>`;
-            return; // Stop execution if no interests are selected
+            return;
         }
 
-        // 2. Set up UI for loading state
-        generateBtn.disabled = true; // Disable button to prevent multiple clicks
-        generateBtn.textContent = 'Generating...'; // Change button text
-        loader.style.display = 'block'; // Show the loading spinner
-        resultContainer.innerHTML = ''; // Clear any previous results
+        generateBtn.disabled = true;
+        generateBtn.textContent = 'Generating...';
+        loader.style.display = 'block';
+        resultContainer.innerHTML = '';
 
-        // 3. Construct the prompt for the Gemini API
-        // This prompt instructs the AI on its role, the user's inputs,
-        // and specific requirements for the itinerary generation.
         const prompt = `
             You are an expert travel assistant for the "Desert Overnight Camp & Resort" in Sam Sand Dunes, Jaisalmer, Rajasthan.
             A potential guest wants a personalized itinerary.
@@ -475,12 +620,11 @@
             - Write in a warm, inviting, and slightly poetic tone that captures the magic of the desert.
         `;
 
-        // 4. Call the Gemini API
         try {
             let chatHistory = [];
-            chatHistory.push({ role: "user", parts: [{ text: prompt }] }); // Add the user prompt to chat history
-            const payload = { contents: chatHistory }; // Create the payload for the API request
-            const apiKey = ""; // API key will be automatically handled by the environment (leave empty)
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = { contents: chatHistory };
+            const apiKey = "";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
             
             const response = await fetch(apiUrl, {
@@ -489,35 +633,76 @@
                 body: JSON.stringify(payload)
             });
 
-            // Check if the API response was successful
             if (!response.ok) {
                 throw new Error(`API request failed with status ${response.status}: ${response.statusText}`);
             }
             
-            const result = await response.json(); // Parse the JSON response
+            const result = await response.json();
 
-            // Check if the response contains valid content
             if (result.candidates && result.candidates.length > 0 &&
                 result.candidates[0].content && result.candidates[0].content.parts &&
                 result.candidates[0].content.parts.length > 0) {
-                const text = result.candidates[0].content.parts[0].text; // Extract the generated text
-                // Use marked.js to convert Markdown to HTML and display it
+                const text = result.candidates[0].content.parts[0].text;
                 resultContainer.innerHTML = marked.parse(text);
             } else {
                 throw new Error("Received an empty or invalid response from the API.");
             }
 
         } catch (error) {
-            // Log the error for debugging purposes
             console.error("Error calling Gemini API:", error);
-            // Display a user-friendly error message
             resultContainer.innerHTML = `<p style="color: red; text-align: center;">Sorry, we couldn't generate your itinerary at this moment. Please try again later. Error: ${error.message}</p>`;
         } finally {
-            // 5. Reset UI from loading state, regardless of success or failure
-            loader.style.display = 'none'; // Hide the loading spinner
-            generateBtn.disabled = false; // Re-enable the button
-            generateBtn.textContent = 'Generate My Itinerary'; // Reset button text
+            loader.style.display = 'none';
+            generateBtn.disabled = false;
+            generateBtn.textContent = 'Generate My Itinerary';
         }
+    });
+
+    // --- Image Slider Logic ---
+    const slider = document.getElementById('image-slider');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const sliderDotsContainer = document.getElementById('slider-dots');
+    const images = slider.querySelectorAll('img');
+    let currentIndex = 0;
+
+    // Function to update slider position
+    function updateSlider() {
+        slider.style.transform = `translateX(${-currentIndex * 100}%)`;
+        updateDots();
+    }
+
+    // Function to update active dot
+    function updateDots() {
+        sliderDotsContainer.innerHTML = ''; // Clear existing dots
+        images.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (index === currentIndex) {
+                dot.classList.add('active');
+            }
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateSlider();
+            });
+            sliderDotsContainer.appendChild(dot);
+        });
+    }
+
+    // Event listeners for navigation buttons
+    prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+        updateSlider();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+        updateSlider();
+    });
+
+    // Initialize slider and dots on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        updateSlider();
     });
   </script>
 </body>
