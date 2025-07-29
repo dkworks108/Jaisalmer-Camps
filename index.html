@@ -27,7 +27,8 @@
       box-shadow: 0 10px 35px rgba(0,0,0,0.1);
     }
     .header {
-      background: url('https://placehold.co/700x280/a8651c/ffffff?text=Desert+Camp+Resort') center/cover no-repeat;
+      /* Using a more evocative placeholder color for a premium feel with a gradient overlay */
+      background: linear-gradient(rgba(168, 101, 28, 0.7), rgba(199, 137, 72, 0.7)), url('https://placehold.co/700x280/a8651c/ffffff?text=Desert+Camp+Resort') center/cover no-repeat;
       height: 280px;
       display: flex;
       flex-direction: column;
@@ -35,19 +36,20 @@
       align-items: center;
       color: #fff;
       text-align: center;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      text-shadow: 3px 3px 8px rgba(0,0,0,0.7); /* Slightly stronger shadow for premium look */
       padding: 30px;
     }
     .header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 38px;
+      font-size: 42px; /* Slightly larger font size for impact */
       margin: 0;
       font-weight: 700;
+      letter-spacing: 2px; /* Added letter spacing for premium look */
     }
     .header p {
-      font-size: 18px;
+      font-size: 20px; /* Slightly larger for better readability */
       font-style: italic;
-      margin-top: 10px;
+      margin-top: 15px; /* Increased margin for separation */
     }
     .section {
       padding: 40px 30px;
@@ -621,12 +623,14 @@
             - Use Markdown for formatting (e.g., ## for day headings, ### for activities, * for list items, ** for bold text).
             - Write in a warm, inviting, and slightly poetic tone that captures the magic of the desert.
         `;
-
         try {
             let chatHistory = [];
             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
             const payload = { contents: chatHistory };
-            const apiKey = "";
+            // The API key is expected to be handled by the environment.
+            // If you are running this outside the Canvas environment and encounter a 403 error,
+            // please ensure your API key is correctly configured and has the necessary permissions.
+            const apiKey = ""; 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
             
             const response = await fetch(apiUrl, {
@@ -636,7 +640,12 @@
             });
 
             if (!response.ok) {
-                throw new Error(`API request failed with status ${response.status}: ${response.statusText}`);
+                // More specific error message for 403
+                if (response.status === 403) {
+                    throw new Error(`API request failed with status ${response.status}: Access Forbidden. Please check your API key and its permissions.`);
+                } else {
+                    throw new Error(`API request failed with status ${response.status}: ${response.statusText}`);
+                }
             }
             
             const result = await response.json();
@@ -652,7 +661,21 @@
 
         } catch (error) {
             console.error("Error calling Gemini API:", error);
-            resultContainer.innerHTML = `<p style="color: red; text-align: center;">Sorry, we couldn't generate your itinerary at this moment. Please try again later. Error: ${error.message}</p>`;
+            // Display a more prominent and informative error message to the user
+            resultContainer.innerHTML = `
+                <div style="background-color: #ffe0e0; border: 1px solid #ff9999; border-radius: 8px; padding: 15px; margin-top: 20px; text-align: center; color: #cc0000; font-weight: 500;">
+                    <p style="margin: 0; font-size: 16px;">
+                        <i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>
+                        Oops! Something went wrong.
+                    </p>
+                    <p style="margin: 10px 0 0; font-size: 14px;">
+                        ${error.message}. Please try again later.
+                    </p>
+                    <p style="margin: 5px 0 0; font-size: 12px; opacity: 0.8;">
+                        (If you are hosting this, ensure your API key is valid and has access to the Gemini API.)
+                    </p>
+                </div>
+            `;
         } finally {
             loader.style.display = 'none';
             generateBtn.disabled = false;
