@@ -90,18 +90,21 @@
     /* --- Package Styles --- */
     .packages-container {
         margin-top: 40px;
-        padding-bottom: 40vh;
+        /* Removed padding-bottom as sticky behavior is changed */
         position: relative;
     }
     .package-card {
         padding: 25px 30px;
         border-radius: 15px;
         box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-        margin-bottom: 20px;
-        position: -webkit-sticky;
-        position: sticky;
+        margin-bottom: 20px; /* Added margin for spacing between cards */
+        /* Removed position: sticky and top properties to fix overlapping */
         color: #fff;
-        transition: all 0.3s ease-in-out;
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+    }
+    .package-card:hover {
+        transform: translateY(-5px); /* Subtle lift effect on hover */
+        box-shadow: 0 12px 40px rgba(0,0,0,0.2); /* Enhanced shadow on hover */
     }
     .package-card h3 {
         font-family: 'Playfair Display', serif;
@@ -115,11 +118,11 @@
         display: flex;
         justify-content: space-between;
         gap: 25px;
-        flex-wrap: wrap;
+        flex-wrap: wrap; /* Allows details to wrap on smaller screens */
     }
     .tent-type {
         flex: 1;
-        min-width: 200px;
+        min-width: 200px; /* Ensures minimum width before wrapping */
         background: rgba(0,0,0,0.1);
         padding: 15px;
         border-radius: 10px;
@@ -154,6 +157,7 @@
         color: #fff;
         font-size: 15px;
     }
+    /* Unique gradients for each card */
     .card-1 { background: linear-gradient(45deg, #a8651c, #c78948); }
     .card-2 { background: linear-gradient(45deg, #b57c3f, #d19a67); }
     .card-3 { background: linear-gradient(45deg, #c19262, #dea981); }
@@ -191,7 +195,7 @@
     }
     .interests-group {
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: wrap; /* Allows checkboxes to wrap */
         gap: 10px;
     }
     .interests-group label {
@@ -204,7 +208,7 @@
         transition: all 0.2s ease;
     }
     .interests-group input[type="checkbox"] {
-        display: none;
+        display: none; /* Hide default checkbox */
     }
     .interests-group input[type="checkbox"]:checked + label {
         background-color: #a8651c;
@@ -259,10 +263,11 @@
         border-radius: 10px;
         border: 1px solid #f9ede1;
     }
-    #itinerary-result h3 { color: #a8651c; }
-    #itinerary-result h4 { color: #c78948; }
+    #itinerary-result h3 { color: #a8651c; margin-top: 20px; }
+    #itinerary-result h4 { color: #c78948; margin-top: 15px; }
     #itinerary-result ul { padding-left: 20px; }
     #itinerary-result li { margin-bottom: 8px; }
+    #itinerary-result p { text-align: left; } /* Ensure generated text aligns left */
 
     /* --- CTA & Footer --- */
     .cta {
@@ -321,49 +326,49 @@
 
         <div class="packages-container">
             <!-- Package Cards -->
-            <div class="package-card card-1" style="top: 60px; z-index: 1;">
+            <div class="package-card card-1">
                 <h3>1st August – 15th October</h3>
                 <div class="package-details">
                     <div class="tent-type"><h4>Deluxe Swiss Tent</h4><p class="price">₹2,500</p><p class="price-note">Extra Person: ₹1,500</p></div>
                     <div class="tent-type"><h4>Royal Maharaja Suite</h4><p class="price">₹3,500</p><p class="price-note">Extra Person: ₹1,500</p></div>
                 </div><p class="child-note">Child up to 7 years complimentary.</p>
             </div>
-            <div class="package-card card-2" style="top: 80px; z-index: 2;">
+            <div class="package-card card-2">
                 <h3>16th October – 30th October</h3>
                 <div class="package-details">
                     <div class="tent-type"><h4>Deluxe Swiss Tent</h4><p class="price">₹6,000</p><p class="price-note">Extra Person: ₹1,500</p></div>
                     <div class="tent-type"><h4>Royal Maharaja Suite</h4><p class="price">₹7,000</p><p class="price-note">Extra Person: ₹1,500</p></div>
                 </div>
             </div>
-            <div class="package-card card-3" style="top: 100px; z-index: 3;">
+            <div class="package-card card-3">
                 <h3>1st November – 20th December</h3>
                 <div class="package-details">
                     <div class="tent-type"><h4>Deluxe Swiss Tent</h4><p class="price">₹3,000</p><p class="price-note">Extra Person: ₹1,500</p></div>
                     <div class="tent-type"><h4>Royal Maharaja Suite</h4><p class="price">₹4,000</p><p class="price-note">Extra Person: ₹1,500</p></div>
                 </div>
             </div>
-            <div class="package-card card-4" style="top: 120px; z-index: 4;">
+            <div class="package-card card-4">
                 <h3>21st December – 30th December</h3>
                 <div class="package-details">
                     <div class="tent-type"><h4>Deluxe Swiss Tent</h4><p class="price">₹7,000</p><p class="price-note">Extra Person: ₹1,500</p></div>
                     <div class="tent-type"><h4>Royal Maharaja Suite</h4><p class="price">₹8,000</p><p class="price-note">Extra Person: ₹1,500</p></div>
                 </div>
             </div>
-            <div class="package-card card-5" style="top: 140px; z-index: 5;">
+            <div class="package-card card-5">
                 <h3>31st December (New Year's Eve)</h3>
                 <div class="package-details">
                     <div class="tent-type"><h4>Deluxe Swiss Tent</h4><p class="price">₹12,000</p><p class="price-note">Extra Person: ₹2,500</p></div>
                     <div class="tent-type"><h4>Royal Maharaja Suite</h4><p class="price">₹15,000</p><p class="price-note">Extra Person: ₹2,500</p></div>
                 </div>
             </div>
-            <div class="package-card card-6" style="top: 160px; z-index: 6;">
+            <div class="package-card card-6">
                 <h3>1st January – 15th January</h3>
                 <div class="package-details">
                     <div class="tent-type"><h4>Deluxe Swiss Tent</h4><p class="price">₹4,500</p><p class="price-note">Extra Person: ₹1,500</p></div>
                     <div class="tent-type"><h4>Royal Maharaja Suite</h4><p class="price">₹5,500</p><p class="price-note">Extra Person: ₹1,500</p></div>
                 </div>
             </div>
-            <div class="package-card card-7" style="top: 180px; z-index: 7;">
+            <div class="package-card card-7">
                 <h3>16th January – 31st March</h3>
                 <div class="package-details">
                     <div class="tent-type"><h4>Deluxe Swiss Tent</h4><p class="price">₹2,500</p><p class="price-note">Extra Person: ₹1,500</p></div>
@@ -425,6 +430,7 @@
     const daysInput = document.getElementById('days');
     const interestsCheckboxes = document.querySelectorAll('.interests-group input[type="checkbox"]');
 
+    // Add event listener to the generate button
     generateBtn.addEventListener('click', async () => {
         // 1. Get user inputs
         const numberOfDays = daysInput.value;
@@ -433,18 +439,21 @@
             .map(i => i.value)
             .join(', ');
 
+        // Basic validation: ensure at least one interest is selected
         if (!selectedInterests) {
-            resultContainer.innerHTML = `<p style="color: red; text-align: center;">Please select at least one interest.</p>`;
-            return;
+            resultContainer.innerHTML = `<p style="color: red; text-align: center;">Please select at least one interest to generate your itinerary.</p>`;
+            return; // Stop execution if no interests are selected
         }
 
         // 2. Set up UI for loading state
-        generateBtn.disabled = true;
-        generateBtn.textContent = 'Generating...';
-        loader.style.display = 'block';
-        resultContainer.innerHTML = '';
+        generateBtn.disabled = true; // Disable button to prevent multiple clicks
+        generateBtn.textContent = 'Generating...'; // Change button text
+        loader.style.display = 'block'; // Show the loading spinner
+        resultContainer.innerHTML = ''; // Clear any previous results
 
         // 3. Construct the prompt for the Gemini API
+        // This prompt instructs the AI on its role, the user's inputs,
+        // and specific requirements for the itinerary generation.
         const prompt = `
             You are an expert travel assistant for the "Desert Overnight Camp & Resort" in Sam Sand Dunes, Jaisalmer, Rajasthan.
             A potential guest wants a personalized itinerary.
@@ -469,10 +478,10 @@
         // 4. Call the Gemini API
         try {
             let chatHistory = [];
-            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-            const payload = { contents: chatHistory };
-            const apiKey = ""; // API key will be automatically handled by the environment
-            const apiUrl = \`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=\${apiKey}\`;
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] }); // Add the user prompt to chat history
+            const payload = { contents: chatHistory }; // Create the payload for the API request
+            const apiKey = ""; // API key will be automatically handled by the environment (leave empty)
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
             
             const response = await fetch(apiUrl, {
                 method: 'POST',
@@ -480,30 +489,34 @@
                 body: JSON.stringify(payload)
             });
 
+            // Check if the API response was successful
             if (!response.ok) {
-                throw new Error(\`API request failed with status \${response.status}\`);
+                throw new Error(`API request failed with status ${response.status}: ${response.statusText}`);
             }
             
-            const result = await response.json();
+            const result = await response.json(); // Parse the JSON response
 
+            // Check if the response contains valid content
             if (result.candidates && result.candidates.length > 0 &&
                 result.candidates[0].content && result.candidates[0].content.parts &&
                 result.candidates[0].content.parts.length > 0) {
-                const text = result.candidates[0].content.parts[0].text;
-                // Use marked.js to convert Markdown to HTML
+                const text = result.candidates[0].content.parts[0].text; // Extract the generated text
+                // Use marked.js to convert Markdown to HTML and display it
                 resultContainer.innerHTML = marked.parse(text);
             } else {
                 throw new Error("Received an empty or invalid response from the API.");
             }
 
         } catch (error) {
+            // Log the error for debugging purposes
             console.error("Error calling Gemini API:", error);
-            resultContainer.innerHTML = \`<p style="color: red; text-align: center;">Sorry, we couldn't generate your itinerary at this moment. Please try again later.</p>\`;
+            // Display a user-friendly error message
+            resultContainer.innerHTML = `<p style="color: red; text-align: center;">Sorry, we couldn't generate your itinerary at this moment. Please try again later. Error: ${error.message}</p>`;
         } finally {
-            // 5. Reset UI from loading state
-            loader.style.display = 'none';
-            generateBtn.disabled = false;
-            generateBtn.textContent = 'Generate My Itinerary';
+            // 5. Reset UI from loading state, regardless of success or failure
+            loader.style.display = 'none'; // Hide the loading spinner
+            generateBtn.disabled = false; // Re-enable the button
+            generateBtn.textContent = 'Generate My Itinerary'; // Reset button text
         }
     });
   </script>
