@@ -11,6 +11,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- The main CSS is kept in the head to ensure the page is styled as it renders -->
   <style>
+    /* Universal box-sizing for consistent layout behavior */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -27,19 +32,32 @@
       box-shadow: 0 10px 35px rgba(0,0,0,0.1);
     }
     .header {
-      /* Using a more evocative placeholder color for a premium feel with a gradient overlay */
-      background: linear-gradient(rgba(168, 101, 28, 0.7), rgba(199, 137, 72, 0.7)), url('https://placehold.co/700x280/a8651c/ffffff?text=Desert+Camp+Resort') center/cover no-repeat;
+      /* Changed background to white and removed image/gradient */
+      background-color: #FFFFFF; /* Solid white background */
       height: 280px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      color: #fff;
+      color: #3a2f27; /* Changed text color for contrast on white background */
       text-align: center;
-      text-shadow: 3px 3px 8px rgba(0,0,0,0.7); /* Slightly stronger shadow for premium look */
+      text-shadow: none; /* Removed text shadow as it's not needed on white */
       padding: 30px;
     }
-    /* Removed specific styles for h1 and p inside header as they are now removed from HTML */
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #a8651c; /* Color for the main heading */
+    }
+    .header p {
+      font-size: 20px;
+      font-style: italic;
+      margin-top: 15px;
+      color: #666; /* Slightly softer color for the sub-text */
+    }
     .section {
       padding: 40px 30px;
     }
@@ -317,7 +335,8 @@
 <body>
   <div class="email-wrapper">
     <div class="header" role="img" aria-label="A scenic view of the desert at sunset">
-      <!-- Removed h1 and p tags as requested -->
+      <h1>🏜️ Desert Overnight Camp & Resort</h1>
+      <p>Sam Sand Dunes, Jaisalmer</p>
     </div>
 
     <div class="section">
